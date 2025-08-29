@@ -6,8 +6,42 @@ import 'package:profile/view/constants.dart';
 import 'package:profile/whatsapp_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Contain extends StatelessWidget {
+class Contain extends StatefulWidget {
   const Contain({super.key});
+
+  @override
+  State<Contain> createState() => _ContainState();
+}
+
+class _ContainState extends State<Contain> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Color?> _colorAnimation;
+  late Animation<double> _sizeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..repeat(reverse: true);
+
+    _colorAnimation = ColorTween(
+      begin: Constants().green,
+      end: Constants().black,
+    ).animate(_controller);
+
+    _sizeAnimation = Tween<double>(
+      begin: 50,
+      end: 60,
+    ).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   void _launchFacebook() async {
     final url = Uri.parse(
@@ -70,23 +104,33 @@ class Contain extends StatelessWidget {
                             Row(
                               children: [
                                 SizedBox(width: size.width * 0.05),
-                                Text(
-                                  "M.Faizan ",
-                                  style: TextStyle(
-                                    fontSize: 50,
-                                    fontWeight: FontWeight.w700,
-                                    color: Constants().green,
-                                    fontFamily: 'bold',
-                                  ),
+                                AnimatedBuilder(
+                                  animation: _controller,
+                                  builder: (context, child) {
+                                    return Text(
+                                      "M.Faizan ",
+                                      style: TextStyle(
+                                        fontSize: _sizeAnimation.value,
+                                        fontWeight: FontWeight.w700,
+                                        color: _colorAnimation.value,
+                                        fontFamily: 'bold',
+                                      ),
+                                    );
+                                  },
                                 ),
-                                Text(
-                                  "Nafees",
-                                  style: TextStyle(
-                                    fontSize: 50,
-                                    fontWeight: FontWeight.w700,
-                                    color: Constants().green,
-                                    fontFamily: 'bold',
-                                  ),
+                                AnimatedBuilder(
+                                  animation: _controller,
+                                  builder: (context, child) {
+                                    return Text(
+                                      "Nafees",
+                                      style: TextStyle(
+                                        fontSize: _sizeAnimation.value,
+                                        fontWeight: FontWeight.w700,
+                                        color: _colorAnimation.value,
+                                        fontFamily: 'bold',
+                                      ),
+                                    );
+                                  },
                                 ),
                               ],
                             ),
