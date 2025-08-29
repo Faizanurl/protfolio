@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:profile/collage_screen.dart';
 import 'package:profile/profile_screen.dart';
 import 'package:profile/view/Cv_screen.dart';
 import 'package:profile/view/constants.dart';
+import 'package:profile/whatsapp_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Contain extends StatelessWidget {
@@ -64,6 +66,7 @@ class Contain extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            SizedBox(height: size.height * 0.03),
                             Row(
                               children: [
                                 SizedBox(width: size.width * 0.05),
@@ -87,12 +90,15 @@ class Contain extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            SizedBox(height: size.height * 0.03),
 
                             Row(
                               children: [
                                 SizedBox(width: size.width * 0.07),
+                                  Icon(Icons.radio_button_checked,size: 10,color: Constants().black,),
+                                SizedBox(width: size.width * 0.01),
                                 Text(
-                                  "i am a flutter developer",
+                                  "I am a flutter developer",
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
@@ -107,6 +113,10 @@ class Contain extends StatelessWidget {
                             Row(
                               children: [
                                 SizedBox(width: size.width * 0.07),
+                             
+                              Icon(Icons.radio_button_checked,size: 10,color: Constants().black,),
+                                SizedBox(width: size.width * 0.01),
+
                                 Text(
                                   "I am from Lahore",
                                   style: TextStyle(
@@ -120,6 +130,8 @@ class Contain extends StatelessWidget {
                                 ),
                               ],
                             ),
+                                SizedBox(height:  size.height * 0.02),
+
                             Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: Text(
@@ -135,7 +147,10 @@ class Contain extends StatelessWidget {
                             SizedBox(height: size.height * 0.05),
 
                             Row(
+                              
                               children: [
+                                SizedBox(width: size.width * 0.07),
+
                                 InkWell(
                                   onTap: () {
                                     Navigator.push(
@@ -145,6 +160,8 @@ class Contain extends StatelessWidget {
                                       ),
                                     );
                                   },
+                                
+
                                   child: Container(
                                     height: 40,
                                     width: 130,
@@ -254,7 +271,7 @@ class Contain extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "I build responsive and engaging mobile applications using Flutter, ensuring seamless performance across both Android and iOS platforms.",
+                                "I build responsive and engaging mobile applications using Flutter, ensuring seamless performance across both Android and iOS",
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w700,
@@ -283,7 +300,7 @@ class Contain extends StatelessWidget {
                             SizedBox(height: size.height * 0.02),
 
                             Text(
-                              "Ios & Mobile",
+                              "Designer",
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w700,
@@ -294,7 +311,7 @@ class Contain extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "Design Software application to run on mobile devices. Modern and mobile _ready applications that will help you all you marketing ",
+                                "As a Flutter designer, I craft visually stunning and user-friendly interfaces for mobile applications. ",
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w700,
@@ -443,7 +460,7 @@ class Contain extends StatelessWidget {
                             SizedBox(height: size.height * 0.02),
 
                             Text(
-                              "    My First Profile",
+                              "Collage Screen",
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w700,
@@ -457,7 +474,7 @@ class Contain extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ProfileScreen(),
+                                    builder: (context) => CollageScreen(),
                                   ),
                                 );
                               },
@@ -491,7 +508,7 @@ class Contain extends StatelessWidget {
                             SizedBox(height: size.height * 0.02),
 
                             Text(
-                              "    My First Profile",
+                              "   Whatsapp Screen",
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w700,
@@ -505,7 +522,7 @@ class Contain extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ProfileScreen(),
+                                    builder: (context) => WhatsappScreen(),
                                   ),
                                 );
                               },
@@ -564,6 +581,9 @@ class Contain extends StatelessWidget {
                                 fontFamily: 'bold',
                               ),
                             ),
+                          ),
+                          SizedBox(
+                            height: size.height * 0.02,
                           ),
                           Container(
                             height: size.height * 0.30,
