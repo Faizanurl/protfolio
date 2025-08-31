@@ -3,14 +3,26 @@ import 'package:profile/view/collage_screen.dart';
 import 'package:profile/view/profile_screen.dart';
 import 'package:profile/view/Cv_screen.dart';
 import 'package:profile/view/constants.dart';
+import 'package:profile/view/container.dart';
 import 'package:profile/view/whatsapp_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Contain extends StatefulWidget {
-  const Contain({super.key});
+class MobileScreen extends StatefulWidget {
+  const MobileScreen({super.key});
 
   @override
-  State<Contain> createState() => _ContainState();
+  State<MobileScreen> createState() => _MobileScreenState();
+}
+
+class _MobileScreenState extends State<MobileScreen> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Color?> _colorAnimation;
+  
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
 }
 
 class _ContainState extends State<Contain> with SingleTickerProviderStateMixin {
@@ -57,6 +69,18 @@ class _ContainState extends State<Contain> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    double screenWidth = size.width;
+
+    // Responsive values
+    double containerWidth = screenWidth < 500 ? screenWidth * 0.95 : screenWidth * 0.50;
+    double profileImageWidth = screenWidth < 500 ? screenWidth * 0.80 : screenWidth * 0.25;
+    double profileImageHeight = screenWidth < 500 ? size.height * 0.30 : size.height * 0.50;
+    double cardWidth = screenWidth < 500 ? screenWidth * 0.90 : screenWidth * 0.20;
+    double cardHeight = screenWidth < 500 ? size.height * 0.20 : size.height * 0.35;
+    double fontSizeTitle = screenWidth < 500 ? 22 : 30;
+    double fontSizeSection = screenWidth < 500 ? 28 : 35;
+    double fontSizeSubtitle = screenWidth < 500 ? 12 : 15;
+
     return Scaffold(
       body: Container(
         height: size.height,
@@ -65,210 +89,209 @@ class _ContainState extends State<Contain> with SingleTickerProviderStateMixin {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              // Profile Section
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        height: size.height * 0.85,
-                        width: size.width * 0.50,
-                        color: Constants().white,
-                        child: Column(
+                  // Main Info Column
+                  Container(
+                    width: containerWidth,
+                    color: Constants().white,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: size.height * 0.08),
+                        Row(
                           children: [
-                            SizedBox(height: size.height * 0.10),
-                            Row(
-                              children: [
-                                SizedBox(width: size.width * 0.05),
-                                Text(
-                                  "Hello_____",
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w600,
-                                    color: Constants().black,
-                                    fontFamily: 'bold',
-                                  ),
-                                ),
-                                SizedBox(width: 20),
-                                Text(
-                                  "My name is",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Constants().green,
-                                    fontFamily: 'ubuntu-bold',
-                                  ),
-                                ),
-                              ],
+                            SizedBox(width: screenWidth * 0.05),
+                            Text(
+                              "Hello_____",
+                              style: TextStyle(
+                                fontSize: fontSizeTitle,
+                                fontWeight: FontWeight.w600,
+                                color: Constants().black,
+                                fontFamily: 'bold',
+                              ),
                             ),
-                            SizedBox(height: size.height * 0.03),
-                            Row(
-                              children: [
-                                SizedBox(width: size.width * 0.05),
-                                AnimatedBuilder(
-                                  animation: _controller,
-                                  builder: (context, child) {
-                                    return Text(
-                                      "M.Faizan ",
-                                      style: TextStyle(
-                                        fontSize: _sizeAnimation.value,
-                                        fontWeight: FontWeight.w700,
-                                        color: _colorAnimation.value,
-                                        fontFamily: 'bold',
-                                      ),
-                                    );
-                                  },
-                                ),
-                                AnimatedBuilder(
-                                  animation: _controller,
-                                  builder: (context, child) {
-                                    return Text(
-                                      "Nafees",
-                                      style: TextStyle(
-                                        fontSize: _sizeAnimation.value,
-                                        fontWeight: FontWeight.w700,
-                                        color: _colorAnimation.value,
-                                        fontFamily: 'bold',
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: size.height * 0.03),
-
-                            Row(
-                              children: [
-                                SizedBox(width: size.width * 0.07),
-                                  Icon(Icons.radio_button_checked,size: 10,color: Constants().black,),
-                                SizedBox(width: size.width * 0.01),
-                                Text(
-                                  "I am a flutter developer",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Constants().black,
-                                    fontFamily: 'ubuntu-bold',
-                      decoration: TextDecoration.underline,
-
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(width: size.width * 0.07),
-                             
-                              Icon(Icons.radio_button_checked,size: 10,color: Constants().black,),
-                                SizedBox(width: size.width * 0.01),
-
-                                Text(
-                                  "I am from Lahore",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Constants().black,
-                                    fontFamily: 'ubuntu-bold',
-                      decoration: TextDecoration.underline,
-
-                                  ),
-                                ),
-                              ],
-                            ),
-                                SizedBox(height:  size.height * 0.02),
-
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child:
-                             
-                                Card(
-                                  elevation: 4,color: Constants().green,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
-                                    side: BorderSide(color: Constants().green, width: 2),
-                                  ),
-
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0,
-                                          horizontal: 12.0,
-                                        ),
-                                        child: Text(
-                                          "   As a Flutter developer with a strong focus on UI/UX design, I specialize in creating intuitive, responsive, and visually engaging mobile application. I ensure pixel-perfect execution across both Android and iOS platforms. My workflow emphasizes clean code, design consistency, and cross-platform performance optimization, allowing me to deliver apps that are both beautiful and functional.",
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w700,
-                                            color: Constants().white1,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              // ),
-                            ),
-
-                            SizedBox(height: size.height * 0.05),
-
-                            Row(
-                              
-                              children: [
-                                SizedBox(width: size.width * 0.07),
-
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => CvScreen(),
-                                      ),
-                                    );
-                                  },
-                                
-
-                                  child: Container(
-                                    height: 40,
-                                    width: 130,
-                                    decoration: BoxDecoration(
-                                      color: Constants().white1,
-                                      borderRadius: BorderRadius.circular(30),
-                                      border: Border.all(
-                                        width: 2,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    child: Center(child: Text("Download Cv",style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Constants().black,
-                                    fontFamily: 'ubuntu-bold',
-                      
-
-                                  ),)),
-                                  ),
-                                ),
-                                Text("_______My skills"),
-                              ],
+                            SizedBox(width: 10),
+                            Text(
+                              "My name is",
+                              style: TextStyle(
+                                fontSize: fontSizeSubtitle,
+                                fontWeight: FontWeight.w600,
+                                color: Constants().green,
+                                fontFamily: 'ubuntu-bold',
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                        SizedBox(height: size.height * 0.02),
+                        Row(
+                          children: [
+                            SizedBox(width: screenWidth * 0.05),
+                            AnimatedBuilder(
+                              animation: _controller,
+                              builder: (context, child) {
+                                return Text(
+                                  "M.Faizan ",
+                                  style: TextStyle(
+                                    fontSize: _sizeAnimation.value,
+                                    fontWeight: FontWeight.w700,
+                                    color: _colorAnimation.value,
+                                    fontFamily: 'bold',
+                                  ),
+                                );
+                              },
+                            ),
+                            AnimatedBuilder(
+                              animation: _controller,
+                              builder: (context, child) {
+                                return Text(
+                                  "Nafees",
+                                  style: TextStyle(
+                                    fontSize: _sizeAnimation.value,
+                                    fontWeight: FontWeight.w700,
+                                    color: _colorAnimation.value,
+                                    fontFamily: 'bold',
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: size.height * 0.02),
+
+                        Row(
+                          children: [
+                            SizedBox(width: size.width * 0.07),
+                              Icon(Icons.radio_button_checked,size: 10,color: Constants().black,),
+                            SizedBox(width: size.width * 0.01),
+                            Text(
+                              "I am a flutter developer",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: Constants().black,
+                                fontFamily: 'ubuntu-bold',
+                  decoration: TextDecoration.underline,
+
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(width: size.width * 0.07),
+                         
+                          Icon(Icons.radio_button_checked,size: 10,color: Constants().black,),
+                            SizedBox(width: size.width * 0.01),
+
+                            Text(
+                              "I am from Lahore",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: Constants().black,
+                                fontFamily: 'ubuntu-bold',
+                  decoration: TextDecoration.underline,
+
+                              ),
+                            ),
+                          ],
+                        ),
+                          SizedBox(height:  size.height * 0.02),
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child:
+                         
+                            Card(
+                              elevation: 4,color: Constants().green,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                                side: BorderSide(color: Constants().green, width: 2),
+                              ),
+
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 8.0,
+                                      horizontal: 12.0,
+                                    ),
+                                    child: Text(
+                                      "   As a Flutter developer with a strong focus on UI/UX design, I specialize in creating intuitive, responsive, and visually engaging mobile application. I ensure pixel-perfect execution across both Android and iOS platforms. My workflow emphasizes clean code, design consistency, and cross-platform performance optimization, allowing me to deliver apps that are both beautiful and functional.",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w700,
+                                        color: Constants().white1,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          // ),
+                        ),
+
+                        SizedBox(height: size.height * 0.05),
+
+                        Row(
+                          
+                          children: [
+                            SizedBox(width: size.width * 0.07),
+
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CvScreen(),
+                                  ),
+                                );
+                              },
+                            
+
+                              child: Container(
+                                height: 40,
+                                width: 130,
+                                decoration: BoxDecoration(
+                                  color: Constants().white1,
+                                  borderRadius: BorderRadius.circular(30),
+                                  border: Border.all(
+                                    width: 2,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                child: Center(child: Text("Download Cv",style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: Constants().black,
+                                fontFamily: 'ubuntu-bold',
+                      
+
+                              ),)),
+                              ),
+                            ),
+                            Text("_______My skills"),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
 
+                  // Profile Image Column
                   Column(
                     children: [
-                      SizedBox(width: size.width * 0.50),
+                      SizedBox(width: screenWidth < 500 ? 0 : screenWidth * 0.05),
                       Container(
-                        height: size.height * 0.52,
-                        width: size.width * 0.24,
+                        height: profileImageHeight,
+                        width: profileImageWidth,
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(color: Constants().black, blurRadius: 30),
                           ],
-                          borderRadius: BorderRadius.all(Radius.circular(size.width*0.13)),
-
+                          borderRadius: BorderRadius.all(Radius.circular(300)),
                           border: Border.all(
                             width: 3,
                             color: Constants().white1,
@@ -277,10 +300,10 @@ class _ContainState extends State<Contain> with SingleTickerProviderStateMixin {
                         ),
                         child: Center(
                           child: Container(
-                            height: size.height * 0.52,
-                            width: size.width * 0.26,
+                            height: profileImageHeight,
+                            width: profileImageWidth,
                             decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(size.width*0.13)),
+                              borderRadius: BorderRadius.all(Radius.circular(300)),
                               image: DecorationImage(
                                 image: AssetImage("assets/fazi2.jpg"),
                                 fit: BoxFit.cover,
@@ -293,61 +316,60 @@ class _ContainState extends State<Contain> with SingleTickerProviderStateMixin {
                   ),
                 ],
               ),
+              // What I Do Section
               Column(
                 children: [
                   AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return Text(
-          "What I Do",
-          style: TextStyle(
-            fontSize: _sizeAnimation.value, // animated size
-            fontWeight: FontWeight.w700,
-            color: _colorAnimation.value,   // animated color
-            fontFamily: 'bold',
-            decoration: TextDecoration.underline,
-          ),
-        );
-      },
-    ),
+                    animation: _controller,
+                    builder: (context, child) {
+                      return Text(
+                        "What I Do",
+                        style: TextStyle(
+                          fontSize: _sizeAnimation.value,
+                          fontWeight: FontWeight.w700,
+                          color: _colorAnimation.value,
+                          fontFamily: 'bold',
+                          decoration: TextDecoration.underline,
+                        ),
+                      );
+                    },
+                  ),
                   Text(
                     "My services",
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: fontSizeSubtitle,
                       fontWeight: FontWeight.w700,
                       color: Constants().black,
                       fontFamily: 'bold',
                     ),
                   ),
-                  SizedBox(height: size.height * 0.06),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  SizedBox(height: size.height * 0.04),
+                  // Responsive Cards
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
                     children: [
                       Container(
-                        height: size.height * 0.35,
-                        width: size.width * 0.20,
-
+                        height: cardHeight,
+                        width: cardWidth,
                         decoration: BoxDecoration(
                           color: Constants().white1,
                           border: Border.all(
-                            width: size.width * 0.003,
+                            width: screenWidth * 0.003,
                             color: Constants().green,
-                            
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-
                           boxShadow: [
                             BoxShadow(color: Constants().black, blurRadius: 30),
                           ],
                         ),
                         child: Column(
                           children: [
-                            SizedBox(height: size.height * 0.02),
-
+                            SizedBox(height: size.height * 0.01),
                             Text(
                               "Flutter Developer",
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: fontSizeSubtitle,
                                 fontWeight: FontWeight.w700,
                                 color: Constants().black,
                                 fontFamily: 'bold',
@@ -358,7 +380,7 @@ class _ContainState extends State<Contain> with SingleTickerProviderStateMixin {
                               child: Text(
                                 "I build responsive and engaging mobile applications using Flutter, ensuring seamless performance across both Android and iOS",
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: fontSizeSubtitle,
                                   fontWeight: FontWeight.w700,
                                   color: Constants().black,
                                   fontFamily: 'ubuntu-bold',
@@ -370,29 +392,26 @@ class _ContainState extends State<Contain> with SingleTickerProviderStateMixin {
                         ),
                       ),
                       Container(
-                        height: size.height * 0.35,
-                        width: size.width * 0.20,
-
+                        height: cardHeight,
+                        width: cardWidth,
                         decoration: BoxDecoration(
                           color: Constants().white1,
                           border: Border.all(
-                            width: size.width * 0.003,
+                            width: screenWidth * 0.003,
                             color: Constants().green,
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-
                           boxShadow: [
                             BoxShadow(color: Constants().black, blurRadius: 30),
                           ],
                         ),
                         child: Column(
                           children: [
-                            SizedBox(height: size.height * 0.02),
-
+                            SizedBox(height: size.height * 0.01),
                             Text(
                               "Designer",
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: fontSizeSubtitle,
                                 fontWeight: FontWeight.w700,
                                 color: Constants().black,
                                 fontFamily: 'bold',
@@ -403,7 +422,7 @@ class _ContainState extends State<Contain> with SingleTickerProviderStateMixin {
                               child: Text(
                                 "As a Flutter designer, I craft visually stunning and user-friendly interfaces for mobile applications. ",
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: fontSizeSubtitle,
                                   fontWeight: FontWeight.w700,
                                   color: Constants().black,
                                   fontFamily: 'ubuntu-bold',
@@ -415,29 +434,26 @@ class _ContainState extends State<Contain> with SingleTickerProviderStateMixin {
                         ),
                       ),
                       Container(
-                        height: size.height * 0.35,
-                        width: size.width * 0.20,
-
+                        height: cardHeight,
+                        width: cardWidth,
                         decoration: BoxDecoration(
                           color: Constants().white1,
                           border: Border.all(
-                            width: size.width * 0.003,
+                            width: screenWidth * 0.003,
                             color: Constants().green,
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-
                           boxShadow: [
                             BoxShadow(color: Constants().black, blurRadius: 30),
                           ],
                         ),
                         child: Column(
                           children: [
-                            SizedBox(height: size.height * 0.02),
-
+                            SizedBox(height: size.height * 0.01),
                             Text(
                               "Ios & Mobile",
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: fontSizeSubtitle,
                                 fontWeight: FontWeight.w700,
                                 color: Constants().black,
                                 fontFamily: 'bold',
@@ -448,7 +464,7 @@ class _ContainState extends State<Contain> with SingleTickerProviderStateMixin {
                               child: Text(
                                 "Design Software application to run on mobile devices. Modern and mobile _ready applications that will help you all you marketing ",
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: fontSizeSubtitle,
                                   fontWeight: FontWeight.w700,
                                   color: Constants().black,
                                   fontFamily: 'ubuntu-bold',

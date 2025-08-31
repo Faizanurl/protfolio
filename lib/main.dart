@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:profile/view/mobile.dart';
+import 'package:profile/view/mobile_screen.dart';
 
 import 'package:profile/view/Protfolio_Screen.dart';
 import 'package:profile/view/constants.dart';
@@ -35,7 +37,7 @@ class Profile extends StatelessWidget {
         ],
       
         ),
-        body: Contain()
+        body: size.width>=480?Contain():Mobile()
        // body: (size.width >= 1220)?ProtfolioScreen():(size.width>= 760)?Contain():Contain2()
         
          
